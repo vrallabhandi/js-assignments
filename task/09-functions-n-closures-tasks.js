@@ -25,8 +25,10 @@
  *   getComposition(Math.sin, Math.asin)(x) => Math.sin(Math.acos(x))
  *
  */
-function getComposition(f,g) {
-    throw new Error('Not implemented');
+function getComposition(f, g) {
+    return function() {
+        return f(g.apply(this, arguments));
+    }
 }
 
 
@@ -47,7 +49,9 @@ function getComposition(f,g) {
  *
  */
 function getPowerFunction(exponent) {
-    throw new Error('Not implemented');
+    return function(num) {
+        return Math.pow(num, exponent);
+    }
 }
 
 
@@ -84,7 +88,14 @@ function getPolynom() {
  *   memoizer() => the same random number  (next run, returns the previous cached result)
  */
 function memoize(func) {
-    throw new Error('Not implemented');
+    var cachedResult = {};
+    return function() {
+        var key = JSON.stringify(arguments);
+        if (!cachedResult.hasOwnProperty(key)) {
+            cachedResult[key] = func.apply(this, arguments);
+        }
+        return cachedResult[key];
+    };
 }
 
 
@@ -104,7 +115,13 @@ function memoize(func) {
  * retryer() => 2
  */
 function retry(func, attempts) {
-    throw new Error('Not implemented');
+    return function() {
+        for (var i = 0; i <= attempts; i++) {
+            try {
+                return func();
+            } catch (e) {}
+        }
+    }
 }
 
 
@@ -132,6 +149,9 @@ function retry(func, attempts) {
  *
  */
 function logger(func, logFunc) {
+    //    return function() {
+    //        return logFunc(func.apply(this, arguments));
+    //    }
     throw new Error('Not implemented');
 }
 
@@ -150,7 +170,11 @@ function logger(func, logFunc) {
  *   partialUsingArguments(fn, 'a','b','c','d')() => 'abcd'
  */
 function partialUsingArguments(fn) {
-    throw new Error('Not implemented');
+    var args = Array.prototype.slice.call(arguments, 1);
+    return function() {
+        var args2 = Array.prototype.slice.call(arguments, 0);
+        return fn.apply(this, args.concat(args2));
+    }
 }
 
 
@@ -171,7 +195,9 @@ function partialUsingArguments(fn) {
  *   getId10() => 11
  */
 function getIdGeneratorFunction(startFrom) {
-    throw new Error('Not implemented');
+    return function() {
+        return startFrom++;
+    }
 }
 
 

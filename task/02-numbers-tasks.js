@@ -54,8 +54,7 @@ function getCicleCircumference(radius) {
  *  -3, 3  => 0
  */
 function getAverage(value1, value2) {
-    //return (value1 + value2) / 2;
-	throw new Error('Not implemented');
+    return (value1 / 2) + (value2 / 2);
 }
 
 /**
@@ -118,8 +117,7 @@ function getLinearEquationRoot(a, b) {
  *   (0,1) (1,2)     => 0
  */
 function getAngleBetweenVectors(x1, y1, x2, y2) {
-    //return Math.atan2(y2 - y1, x2 - x1);
-	throw new Error('Not implemented');
+    return Math.abs(Math.atan2(y2, x2) - Math.atan2(y1, x1));
 }
 
 /**
@@ -168,7 +166,7 @@ function parseNumberFromString(value) {
  *   1,2,3   => 3.741657386773941
  */
 function getParallelipidedDiagonal(a,b,c) {
-    throw new Error('Not implemented');
+    return Math.hypot(a, b, c);
 }
 
 /**
@@ -189,7 +187,8 @@ function getParallelipidedDiagonal(a,b,c) {
  *   1678, 3  => 2000
  */
 function roundToPowerOfTen(num, pow) {
-    throw new Error('Not implemented');
+    var powerOfTen = Math.pow(10, pow);
+    return Math.round(num / powerOfTen) * powerOfTen;
 }
 
 /**
